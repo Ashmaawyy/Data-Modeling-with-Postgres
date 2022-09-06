@@ -8,24 +8,24 @@ time_table_drop = "DROP TABLE IF EXISTS times"
 
 # CREATE TABLES
 
-songplay_table_create = (""" CREATE TABLE IF NOT EXISTS songplays 
-(songplay_id int PRIMARY KEY, start_time timestamp FOREIGN KEY, user_id int FOREIGN KEY, level int, song_id int FOREIGN KEY, artist_id int FOREIGN KEY, session_id int, location varchar, user_agent)
+songplay_table_create = (""" CREATE TABLE IF NOT EXISTS songplays
+(songplay_id int PRIMARY KEY, start_time timestamp, user_id int, level int, song_id int, artist_id int, session_id int, location varchar, user_agent varchar);
 """)
 
 user_table_create = (""" CREATE TABLE IF NOT EXISTS users
-(user_id int PRIMARY KEY, first_name varchar, last_name varchar, gender varchar, level int)
+(user_id int PRIMARY KEY, first_name varchar, last_name varchar, gender varchar, level int);
 """)
 
 song_table_create = (""" CREATE TABLE IF NOT EXISTS songs
-(song_id int PRIMARY KEY, title varchar, artist_id int, year int, duration long)
+(song_id int PRIMARY KEY, title varchar, artist_id int, year int, duration decimal);
 """)
 
 artist_table_create = (""" CREATE TABLE IF NOT EXISTS artists
-(artist_id int PRIMARY KEY, name varchar, location varchar, latitude long, longitude long)
+(artist_id int PRIMARY KEY, name varchar, location varchar, latitude decimal, longitude decimal);
 """)
 
 time_table_create = (""" CREATE TABLE IF NOT EXISTS times
-(time_record_id int SERIAL PRIMARY KEY, start_time timestamp, hour int, day varchar, week int, month int, weekday varchar)
+(start_time timestamp PRIMARY KEY, hour int, day varchar, week int, month int, weekday varchar);
 """)
 
 # INSERT RECORDS
