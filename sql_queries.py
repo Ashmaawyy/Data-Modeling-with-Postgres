@@ -8,24 +8,53 @@ time_table_drop = "DROP TABLE IF EXISTS times"
 
 # CREATE TABLES
 
-songplay_table_create = (""" CREATE TABLE IF NOT EXISTS songplays
-(songplay_id int PRIMARY KEY, start_time timestamp, user_id int, level int, song_id int, artist_id int, session_id int, location varchar, user_agent varchar);
-""")
-
 user_table_create = (""" CREATE TABLE IF NOT EXISTS users
-(user_id int PRIMARY KEY, first_name varchar, last_name varchar, gender varchar, level int);
+(user_id int PRIMARY KEY,
+first_name varchar,
+last_name varchar,
+gender varchar,
+level int);
 """)
 
 song_table_create = (""" CREATE TABLE IF NOT EXISTS songs
-(song_id int PRIMARY KEY, title varchar, artist_id int, year int, duration decimal);
+(song_id int PRIMARY KEY,
+title varchar,
+artist_id int,
+year int,
+duration decimal);
 """)
 
 artist_table_create = (""" CREATE TABLE IF NOT EXISTS artists
-(artist_id int PRIMARY KEY, name varchar, location varchar, latitude decimal, longitude decimal);
+(artist_id int PRIMARY KEY,
+name varchar,
+location varchar,
+latitude decimal,
+longitude decimal);
 """)
 
 time_table_create = (""" CREATE TABLE IF NOT EXISTS times
-(start_time timestamp PRIMARY KEY, hour int, day varchar, week int, month int, weekday varchar);
+(start_time timestamp PRIMARY KEY,
+hour int,
+day varchar,
+week int,
+month int,
+weekday varchar);
+""")
+
+songplay_table_create = (""" CREATE TABLE IF NOT EXISTS songplays
+(songplay_id int PRIMARY KEY,
+start_time timestamp,
+user_id int,
+level int,
+song_id int,
+artist_id int,
+session_id int,
+location varchar,
+user_agent varchar,
+FOREIGN KEY(start_time) REFERENCES times(start_time),
+FOREIGN KEY(user_id) REFERENCES users(user_id),
+FOREIGN KEY(song_id) REFERENCES songs(song_id),
+FOREIGN KEY(artist_id) REFERENCES artists(artist_id));
 """)
 
 # INSERT RECORDS
