@@ -17,15 +17,15 @@ level int);
 """)
 
 song_table_create = (""" CREATE TABLE IF NOT EXISTS songs
-(song_id int PRIMARY KEY,
+(song_id varchar PRIMARY KEY,
 title varchar,
-artist_id int,
+artist_id varchar,
 year int,
 duration decimal);
 """)
 
 artist_table_create = (""" CREATE TABLE IF NOT EXISTS artists
-(artist_id int PRIMARY KEY,
+(artist_id varchar PRIMARY KEY,
 name varchar,
 location varchar,
 latitude decimal,
@@ -45,9 +45,9 @@ songplay_table_create = (""" CREATE TABLE IF NOT EXISTS songplays
 (songplay_id int PRIMARY KEY,
 start_time timestamp,
 user_id int,
-level int,
-song_id int,
-artist_id int,
+level varchar,
+song_id varchar,
+artist_id varchar,
 session_id int,
 location varchar,
 user_agent varchar);
@@ -55,25 +55,37 @@ user_agent varchar);
 
 # INSERT RECORDS
 
-songplay_table_insert = ("""
+songplay_table_insert = (""" INSERT INTO songplays (songplay_id,
+                                                    start_time,
+                                                    user_id,
+                                                    level,
+                                                    song_id,
+                                                    artist_id,
+                                                    session_id,
+                                                    location,
+                                                    user_agent) \ VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
 """)
 
-user_table_insert = ("""
+user_table_insert = (""" INSERT INTO users (user_id, first_name, last_name, gender, level)
+\ VALUES (%s, %s, %s, %s, %s)
 """)
 
-song_table_insert = ("""
+song_table_insert = (""" INSERT INTO songs (artist_id, song_id, title, duration, year) \
+    VALUES (%s, %s, %s, %s, %s)
 """)
 
-artist_table_insert = ("""
+artist_table_insert = (""" INSERT INTO artists (artist_id, latitude, longitude, location, name) \
+    VALUES (%s, %s, %s, %s, %s)
 """)
 
 
-time_table_insert = ("""
+time_table_insert = (""" INSERT INTO times (start_time, hour, day, week, month, weekday)
+\ VALUES (%s, %s, %s, %s, %s, %s)
 """)
 
 # FIND SONGS
 
-song_select = ("""
+song_select = (""" SELECT * FROM songs
 """)
 
 # QUERY LISTS
