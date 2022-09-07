@@ -98,8 +98,8 @@ song_select = (""" SELECT * FROM songs
 
 create_table_queries = [
     user_table_create,
-    artist_table_create,
     song_table_create,
+    artist_table_create,
     time_table_create,
     songplay_table_create]
 
