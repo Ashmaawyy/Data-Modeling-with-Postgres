@@ -32,7 +32,7 @@ latitude decimal,
 longitude decimal);
 """)
 
-time_table_create = (""" CREATE TABLE IF NOT EXISTS times
+time_table_create = (""" CREATE TABLE IF NOT EXISTS time
 (start_time timestamp PRIMARY KEY,
 hour int,
 day varchar,
