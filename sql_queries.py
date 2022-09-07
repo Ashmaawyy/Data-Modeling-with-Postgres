@@ -21,8 +21,7 @@ song_table_create = (""" CREATE TABLE IF NOT EXISTS songs
 title varchar,
 artist_id varchar,
 year int,
-duration decimal,
-FOREIGN KEY(artist_id) REFERENCES artists(artist_id));
+duration decimal);
 """)
 
 artist_table_create = (""" CREATE TABLE IF NOT EXISTS artists
@@ -77,8 +76,7 @@ user_table_insert = (""" INSERT INTO users (user_id, first_name, last_name, gend
     VALUES (%s, %s, %s, %s, %s)
 """)
 
-song_table_insert = (""" INSERT INTO songs (artist_id, song_id, title, duration, year
-                        WHERE artist_id == artists.artist_id) \
+song_table_insert = (""" INSERT INTO songs (artist_id, song_id, title, duration, year) \
     VALUES (%s, %s, %s, %s, %s)
 """)
 
@@ -93,7 +91,7 @@ time_table_insert = (""" INSERT INTO time (start_time, hour, day, week, month, y
 
 # FIND SONGS
 
-song_select = (""" SELECT song_id, artist_id FROM songs
+song_select = (""" SELECT * FROM songs
 """)
 
 # QUERY LISTS
