@@ -35,10 +35,11 @@ longitude decimal);
 time_table_create = (""" CREATE TABLE IF NOT EXISTS time
 (start_time timestamp PRIMARY KEY,
 hour int,
-day varchar,
+day int,
 week int,
 month int,
-weekday varchar);
+year int,
+weekday int);
 """)
 
 songplay_table_create = (""" CREATE TABLE IF NOT EXISTS songplays
@@ -66,8 +67,8 @@ songplay_table_insert = (""" INSERT INTO songplays (songplay_id,
                                                     user_agent) \ VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
 """)
 
-user_table_insert = (""" INSERT INTO users (user_id, first_name, last_name, gender, level)
-\ VALUES (%s, %s, %s, %s, %s)
+user_table_insert = (""" INSERT INTO users (user_id, first_name, last_name, gender, level) \
+    VALUES (%s, %s, %s, %s, %s)
 """)
 
 song_table_insert = (""" INSERT INTO songs (artist_id, song_id, title, duration, year) \
@@ -79,8 +80,8 @@ artist_table_insert = (""" INSERT INTO artists (artist_id, latitude, longitude, 
 """)
 
 
-time_table_insert = (""" INSERT INTO times (start_time, hour, day, week, month, weekday)
-\ VALUES (%s, %s, %s, %s, %s, %s)
+time_table_insert = (""" INSERT INTO time (start_time, hour, day, week, month, year, weekday) \
+    VALUES (%s, %s, %s, %s, %s, %s, %s)
 """)
 
 # FIND SONGS
