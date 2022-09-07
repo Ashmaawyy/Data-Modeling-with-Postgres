@@ -64,7 +64,8 @@ songplay_table_insert = (""" INSERT INTO songplays (songplay_id,
                                                     artist_id,
                                                     session_id,
                                                     location,
-                                                    user_agent) \ VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
+                                                    user_agent) \
+                                                    VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
 """)
 
 user_table_insert = (""" INSERT INTO users (user_id, first_name, last_name, gender, level) \
