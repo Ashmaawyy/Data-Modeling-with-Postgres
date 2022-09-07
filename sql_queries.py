@@ -50,11 +50,7 @@ song_id int,
 artist_id int,
 session_id int,
 location varchar,
-user_agent varchar,
-FOREIGN KEY(start_time) REFERENCES times(start_time),
-FOREIGN KEY(user_id) REFERENCES users(user_id),
-FOREIGN KEY(song_id) REFERENCES songs(song_id),
-FOREIGN KEY(artist_id) REFERENCES artists(artist_id));
+user_agent varchar);
 """)
 
 # INSERT RECORDS
