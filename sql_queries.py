@@ -21,7 +21,8 @@ song_table_create = (""" CREATE TABLE IF NOT EXISTS songs
 title varchar,
 artist_id varchar,
 year int,
-duration decimal);
+duration decimal,
+FOREIGN KEY(artist_id) REFERENCES artists(artist_id));
 """)
 
 artist_table_create = (""" CREATE TABLE IF NOT EXISTS artists
@@ -51,7 +52,11 @@ song_id varchar,
 artist_id varchar,
 session_id int,
 location varchar,
-user_agent varchar);
+user_agent varchar,
+FOREIGN KEY(start_time) REFERENCES time(start_time),
+FOREIGN KEY(user_id) REFERENCES users(user_id),
+FOREIGN KEY(song_id) REFERENCES songs(song_id),
+FOREIGN KEY(artist_id) REFERENCES artists(artist_id));
 """)
 
 # INSERT RECORDS
@@ -72,7 +77,8 @@ user_table_insert = (""" INSERT INTO users (user_id, first_name, last_name, gend
     VALUES (%s, %s, %s, %s, %s)
 """)
 
-song_table_insert = (""" INSERT INTO songs (artist_id, song_id, title, duration, year) \
+song_table_insert = (""" INSERT INTO songs (artist_id, song_id, title, duration, year
+                        WHERE artist_id == artists.artist_id) \
     VALUES (%s, %s, %s, %s, %s)
 """)
 
@@ -87,17 +93,17 @@ time_table_insert = (""" INSERT INTO time (start_time, hour, day, week, month, y
 
 # FIND SONGS
 
-song_select = (""" SELECT * FROM songs
+song_select = (""" SELECT song_id, artist_id FROM songs
 """)
 
 # QUERY LISTS
 
 create_table_queries = [
-    songplay_table_create,
     user_table_create,
-    song_table_create,
     artist_table_create,
-    time_table_create]
+    song_table_create,
+    time_table_create,
+    songplay_table_create]
 
 drop_table_queries = [
     songplay_table_drop,
