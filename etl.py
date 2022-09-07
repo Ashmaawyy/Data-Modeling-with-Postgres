@@ -34,7 +34,7 @@ def process_log_file(cur, filepath):
     next_song_filter_df['ts'] = pd.to_datetime(next_song_filter_df['ts'])
     
     # insert time data records
-    time_stamp = next_song_filter_df['ts']
+    start_time = next_song_filter_df['ts']
     hour = next_song_filter_df['ts'].dt.hour
     day = next_song_filter_df['ts'].dt.day
     week_of_year = next_song_filter_df['ts'].dt.weekofyear
@@ -42,8 +42,8 @@ def process_log_file(cur, filepath):
     year = next_song_filter_df['ts'].dt.year
     weekday = next_song_filter_df['ts'].dt.weekday
 
-    time_data = [time_stamp, hour, day, week_of_year, month, year, weekday]
-    column_labels = ('timestamp', 'hour', 'day', 'week of year', 'month', 'year', 'weekday')
+    time_data = [start_time, hour, day, week_of_year, month, year, weekday]
+    column_labels = ('start_time', 'hour', 'day', 'week of year', 'month', 'year', 'weekday')
 
     time_dict = {column_labels[i]: time_data[i] for i in range(len(column_labels))}
     time_df = pd.DataFrame.from_dict(time_dict)
