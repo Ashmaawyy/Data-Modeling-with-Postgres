@@ -8,7 +8,7 @@
 
 > pip install -r requirements.txt
 
-#### **Note: You should first the run create.py script at least once before other scipts as they depend on the created Database**
+#### ***Note: You should first the run create.py script at least once before other scipts as they depend on the created Database***
 
 ### The steps taken to build this project
 
