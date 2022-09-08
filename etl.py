@@ -86,7 +86,7 @@ def load_logs_data_to_db(cur, filepath):
         cur.execute(time_table_insert, list(row))
 
     # load user table
-    user_df = logs_df.iloc[:, [17, 2, 5, 3, 7]]
+    user_df = next_song_filter_df.iloc[:, [17, 2, 5, 3, 7]]
     user_df = user_df.drop_duplicates()
 
     # insert user records
