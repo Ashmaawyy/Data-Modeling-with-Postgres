@@ -48,7 +48,7 @@ def process_log_file(cur, filepath):
     time_dict = {column_labels[i]: time_data[i] for i in range(len(column_labels))}
     time_df = pd.DataFrame.from_dict(time_dict)
 
-    for i, row in time_df.iterrows():
+    for _, row in time_df.iterrows():
         cur.execute(time_table_insert, list(row))
 
     # load user table
@@ -56,11 +56,11 @@ def process_log_file(cur, filepath):
     user_df = user_df.drop_duplicates()
 
     # insert user records
-    for i, row in user_df.iterrows():
+    for _, row in user_df.iterrows():
         cur.execute(user_table_insert, row)
 
     # insert songplay records
-    for index, row in next_song_filter_df.iterrows():
+    for _, row in next_song_filter_df.iterrows():
         cur.execute(song_select)
         results = cur.fetchone()
         
