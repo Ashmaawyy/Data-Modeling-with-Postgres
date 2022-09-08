@@ -43,7 +43,7 @@ weekday int);
 """)
 
 songplay_table_create = (""" CREATE TABLE IF NOT EXISTS songplays
-(songplay_id int PRIMARY KEY,
+(songplay_id SERIAL PRIMARY KEY,
 start_time timestamp,
 user_id int,
 level varchar,
@@ -58,14 +58,13 @@ FOREIGN KEY(artist_id) REFERENCES artists(artist_id));
 
 # INSERT RECORDS
 
-songplay_table_insert = (""" INSERT INTO songplays (songplay_id,
-                                                    start_time,
+songplay_table_insert = (""" INSERT INTO songplays (start_time,
                                                     user_id,
                                                     level,
                                                     session_id,
                                                     location,
                                                     user_agent) \
-                                                    VALUES (%s, %s, %s, %s, %s, %s, %s)
+                                                    VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
 """)
 
 user_table_insert = (""" INSERT INTO users (user_id, first_name, last_name, gender, level) \
@@ -87,7 +86,7 @@ time_table_insert = (""" INSERT INTO time (start_time, hour, day, week, month, y
 
 # FIND SONGS
 
-song_select = (""" SELECT * FROM songs
+song_select = (""" SELECT song_id, artist_id FROM songs
 """)
 
 # QUERY LISTS
