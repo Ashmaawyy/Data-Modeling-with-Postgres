@@ -5,7 +5,7 @@ import pandas as pd
 from sql_queries import *
 
 
-def get_song_data_from_json(filepath: str) -> pd.DataFrame:
+def get_songs_data_from_json(filepath: str) -> pd.DataFrame:
     """
     Opens song json files and stores their data in a dataframe
     """
@@ -15,13 +15,17 @@ def get_song_data_from_json(filepath: str) -> pd.DataFrame:
     
     return songs_df
 
-def insert_song_data_to_db(cur, filepath):
+def load_songs_data_to_db(cur, filepath):
+    
     """
-    Inserts song data recived from the json file to the songs table,
-    and the artists table in the database
+    Loads logs data into two tables in the database:
+    - songs table -> dimention table
+    - artists table -> dimention table
+
+    *For more details about the tables and their relations please visit the schema*
     """
     
-    songs_df = get_song_data_from_json(filepath)
+    songs_df = get_songs_data_from_json(filepath)
     # insert song record
     song_data = songs_df.iloc[:, [1, 6, 7, 8, 9]].values.tolist()
     song_data = song_data[0]
@@ -35,10 +39,28 @@ def insert_song_data_to_db(cur, filepath):
     cur.execute(artist_table_insert, artist_data)
 
 
-def process_log_file(cur, filepath):
+def get_logs_data_from_json(filepath: str) -> pd.DataFrame:
+    
+    """
+    Extracts the data of the logs json files and stores it in a dataframe
+    """
     # open log file
     logs_df = pd.read_json(filepath, lines = True) # lines = True for trailing data Error
 
+    return logs_df
+
+def load_logs_data_to_db(cur, filepath):
+
+    """
+    Loads logs data into three tables in the database:
+    - songplay table -> fact table
+    - user table -> dimention table
+    - time table -> dimention table
+
+    *For more details about the tables and their relations please visit the schema*
+    """
+
+    logs_df = get_logs_data_from_json(filepath)
     # filter by NextSong action
     next_song_filter_df = logs_df[logs_df['page'] == 'NextSong']
 
@@ -87,6 +109,10 @@ def process_log_file(cur, filepath):
 
 
 def process_data(cur, conn, filepath, func):
+
+    """
+    Gets all the files in a directory and passes them to the func parameter.
+    """
     # get all files matching extension from directory
     all_files = []
     for root, dirs, files in os.walk(filepath):
@@ -109,8 +135,8 @@ def main():
     cur = conn.cursor()
     conn.set_session(autocommit = True)
 
-    process_data(cur, conn, filepath = 'data/song_data', func = process_song_file)
-    process_data(cur, conn, filepath = 'data/log_data', func = process_log_file)
+    process_data(cur, conn, filepath = 'data/song_data', func = load_songs_data_to_db)
+    process_data(cur, conn, filepath = 'data/log_data', func = load_logs_data_to_db)
 
     conn.close()
 
