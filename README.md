@@ -4,7 +4,9 @@
 
 ## The Data Model used in this project is a Relational Model
 
-### In order to install required packages type in your terminal: pip install -r requirements.txt
+### In order to install required packages type the following command in your terminal
+
+> pip install -r requirements.txt
 
 ### The steps taken to build this project
 
@@ -25,3 +27,11 @@
 - artists table -> Dimention Table (artist_id, name, location, latitude, longitude)
 
 - songs table -> Dimention Table (song_id, title, artist_id, year, duration)
+
+### Files of the project
+
+- create_tables.py -> Creates tables of database, drops tables of database if they exist.
+
+- sql_queries.py -> Contains all SQL queries to CREATE, INSERT or SELECT.
+
+- etl.py -> Extracts data from json files, Transforms data to fit Database schema, and Loads the data to its location in the Database.
