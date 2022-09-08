@@ -60,9 +60,7 @@ def process_log_file(cur, filepath):
         cur.execute(user_table_insert, row)
 
     # insert songplay records
-    songplay_data = next_song_filter_df.iloc[:, [15, 17, 7, 12, 8, 16]]
-
-    for _ in range(len(songplay_data)):
+    for index, row in next_song_filter_df.iterrows():
         cur.execute(song_select)
         results = cur.fetchone()
         
@@ -71,10 +69,9 @@ def process_log_file(cur, filepath):
         else:
             song_id, artist_id = None, None
         
-        songplay_data['song_id'] = song_id
-        songplay_data['artist_id'] = artist_id
+        songplay_data = (row.ts, row.userId, row.level, row.sessionId, row.location, row.userAgent, song_id, artist_id)
 
-    cur.execute(songplay_table_insert, songplay_data.values.tolist())
+        cur.execute(songplay_table_insert, songplay_data)
 
 
 def process_data(cur, conn, filepath, func):
