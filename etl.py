@@ -5,11 +5,23 @@ import pandas as pd
 from sql_queries import *
 
 
-def process_song_file(cur, filepath):
+def get_song_data_from_json(filepath: str) -> pd.DataFrame:
+    """
+    Opens song json files and stores their data in a dataframe
+    """
     # open song file
     songs_df = pd.read_json(filepath, orient = 'index')
     songs_df = songs_df.transpose()
+    
+    return songs_df
 
+def insert_song_data_to_db(cur, filepath):
+    """
+    Inserts song data recived from the json file to the songs table,
+    and the artists table in the database
+    """
+    
+    songs_df = get_song_data_from_json(filepath)
     # insert song record
     song_data = songs_df.iloc[:, [1, 6, 7, 8, 9]].values.tolist()
     song_data = song_data[0]
