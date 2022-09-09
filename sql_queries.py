@@ -96,7 +96,7 @@ song_select = (""" SELECT artists.artist_id, song_id FROM artists JOIN songs ON 
                     WHERE songs.title = %s AND artists.name = %s AND songs.duration = %s;
 """)
 
-songplay_test_select = (""" SELECT COUNT (*) FROM songplays WHERE song_id IS NOT NULL;
+songplay_test_select = (""" SELECT * FROM songplays WHERE song_id IS NOT NULL;
 """)
 
 # QUERY LISTS
