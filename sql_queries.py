@@ -92,7 +92,11 @@ time_table_insert = (""" INSERT INTO time (start_time, hour, day, week, month, y
 
 # FIND SONGS
 
-song_select = (""" SELECT song_id, artist_id FROM songs
+song_select = (""" SELECT artists.artist_id, song_id FROM artists JOIN songs ON artists.artist_id = songs.artist_id
+                    WHERE songs.title = %s AND artists.name = %s AND songs.duration = %s;
+""")
+
+songplay_test_select = (""" SELECT COUNT (*) FROM songplays WHERE song_id IS NOT NULL;
 """)
 
 # QUERY LISTS

@@ -95,11 +95,11 @@ def load_logs_data_to_db(cur, filepath):
 
     # insert songplay records
     for _, row in next_song_filter_df.iterrows():
-        cur.execute(song_select)
+        cur.execute(song_select, (row.song, row.artist, row.length))
         results = cur.fetchone()
         
         if results:
-            song_id, artist_id = results
+            artist_id, song_id = results
         else:
             song_id, artist_id = None, None
         
@@ -108,7 +108,7 @@ def load_logs_data_to_db(cur, filepath):
         cur.execute(songplay_table_insert, songplay_data)
 
 
-def process_data(cur, conn, filepath, func):
+def load_data_from_all_files_to_db(cur, conn, filepath, func):
 
     """
     Gets all the files in a directory and passes them to the func parameter.
@@ -135,8 +135,8 @@ def main():
     cur = conn.cursor()
     conn.set_session(autocommit = True)
 
-    process_data(cur, conn, filepath = 'data/song_data', func = load_songs_data_to_db)
-    process_data(cur, conn, filepath = 'data/log_data', func = load_logs_data_to_db)
+    load_data_from_all_files_to_db(cur, conn, filepath = 'data/song_data', func = load_songs_data_to_db)
+    load_data_from_all_files_to_db(cur, conn, filepath = 'data/log_data', func = load_logs_data_to_db)
 
     conn.close()
 
