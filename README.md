@@ -1,5 +1,7 @@
 # Data Modeling with Postgres
 
+<img src = 'https://www.postgresql.org/media/img/about/press/elephant.png'/>
+
 ## The objective of this project is to build a Database and an ETL pipeline for a music application
 
 ## The Data Model used in this project is a Relational Model
