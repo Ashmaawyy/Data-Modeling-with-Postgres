@@ -2,11 +2,11 @@
 
 <p align = 'center'><img src = 'https://www.postgresql.org/media/img/about/press/elephant.png' height = 300 width = 300 /></p>
 
-## The objective of this project is to build a Database and an ETL pipeline for a music application
+### The objective of this project is to build a Database and an ETL pipeline for a music application
 
-## The Data Model used in this project is a Relational Model
+### The Data Model used in this project is a Relational Model
 
-### In order to install required packages type the following command in your terminal
+#### In order to install required packages type the following command in your terminal
 
 > pip install -r requirements.txt
 
