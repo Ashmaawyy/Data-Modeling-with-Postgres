@@ -1,6 +1,6 @@
 # Data Modeling with Postgres
 
-<img src = 'https://www.postgresql.org/media/img/about/press/elephant.png'/>
+<img src = 'https://www.postgresql.org/media/img/about/press/elephant.png' height = 300 width = 300 />
 
 ## The objective of this project is to build a Database and an ETL pipeline for a music application
 
