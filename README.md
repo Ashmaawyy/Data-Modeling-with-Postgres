@@ -1,4 +1,4 @@
-# Data Modeling with Postgres
+# Sparkify Data Modeling with Postgres
 
 <p align = 'center'><img src = 'https://www.postgresql.org/media/img/about/press/elephant.png' height = 300 width = 300 /></p>
 
