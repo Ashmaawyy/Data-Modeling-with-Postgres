@@ -8,7 +8,7 @@
 
 #### In order to install required packages type the following command in your terminal
 
-> pip install -r requirements.txt
+<pre><code>pip install -r requirements.txt</code></pre>
 
 #### ***Note: You should first the run create.py script at least once before other scipts as they depend on the created Database***
 
